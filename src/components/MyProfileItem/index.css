@@ -1,0 +1,139 @@
+.main-container {
+  background-color: #fafafa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  text-align: center;
+}
+.pic-details {
+  display: flex;
+}
+
+.user-profile {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.details-container {
+  margin-left: 50px;
+  padding-top: 13px;
+}
+.user-name {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 32px;
+  line-height: 32px;
+  color: #262626;
+  text-align: start;
+  margin-left: 40px;
+}
+.counting-container {
+  margin-top: 30px;
+  display: flex;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  display: flex;
+  align-items: center;
+
+  color: #262626;
+  margin-left: 45px;
+}
+
+.post {
+  margin-right: 100px;
+}
+.followers {
+  margin-right: 100px;
+}
+.user-id {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  color: #262626;
+  margin-left: 45px;
+  padding-top: 20px;
+  text-align: start;
+}
+.user-bio {
+  margin-left: 45px;
+  padding-top: 17px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 24px;
+  /* or 150% */
+
+  color: #262626;
+  text-align: start;
+}
+
+.stories-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.user-story {
+  max-height: 150px;
+  max-width: 150px;
+  border-radius: 50%;
+  border: 5px solid #ffffff;
+  text-align: center;
+}
+
+.story-circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 155px;
+  width: 155px;
+  border: 3px solid #dbdbdb;
+  border-radius: 50%;
+  margin-right: 40px;
+  margin-top: 40px;
+}
+.hr-line {
+  margin-top: 30px;
+  border: 2px solid #c6c6c8;
+  font-size: 20px;
+}
+
+.grid {
+  display: flex;
+  margin-top: 30px;
+}
+.posts {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  /* identical to box height, or 133% */
+
+  display: flex;
+  align-items: center;
+
+  color: #262626;
+  padding-left: 30px;
+}
+
+.posts-container {
+  margin-top: 30px;
+}
+.post-img {
+  max-width: 330px;
+  max-width: 330px;
+  padding-right: 20px;
+}

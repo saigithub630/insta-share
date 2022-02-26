@@ -1,20 +1,27 @@
-import {Component} from 'react'
-import {HomeContainer, HrLine} from './styledComponents'
+import {Redirect} from 'react-router-dom'
+import Cookies from 'js-cookie'
+
+import HomePosts from '../HomePosts'
+import Stories from '../Stories'
 import Header from '../Header'
 
-// import Stories from '../Stories'
+import './index.css'
 
-class Home extends Component {
-  render() {
-    return (
-      <>
-        <Header />
-        <HomeContainer>
-          <HrLine />
-        </HomeContainer>
-      </>
-    )
+const Home = () => {
+  const jwtToken = Cookies.get('jwt_token')
+  if (jwtToken === undefined) {
+    return <Redirect to="/login" />
   }
+
+  return (
+    <>
+      <Header />
+      <div className="page-container">
+        <Stories />
+        <HomePosts />
+      </div>
+    </>
+  )
 }
 
 export default Home

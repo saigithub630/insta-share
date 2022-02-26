@@ -1,0 +1,30 @@
+.slick-container {
+  width: 60%;
+  margin-top: 20px;
+}
+
+.logo-image {
+  width: 70px;
+  height: 70px;
+
+  border-radius: 35px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: black;
+}
+
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.stroy-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  
+}

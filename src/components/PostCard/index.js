@@ -1,61 +1,117 @@
 import {Component} from 'react'
 import {Link} from 'react-router-dom'
-import {BsHeart} from 'react-icons/bs'
-import {FaRegComment} from 'react-icons/fa'
+
+import Cookies from 'js-cookie'
+
+import {BsHeart, BsHeartFill} from 'react-icons/bs'
+
 import {BiShareAlt} from 'react-icons/bi'
+
+import {FaRegComment} from 'react-icons/fa'
+
 import './index.css'
 
 class PostCard extends Component {
-  render() {
-    const {postDetails} = this.props
+  state = {
+    isLiked: false,
+  }
 
+  toggleLike = async () => {
+    await this.setState(prev => ({isLiked: !prev.isLiked}))
+    const {data} = this.props
+    const {postId} = data
+    const {isLiked} = this.state
+    const requestBody = {
+      like_status: isLiked,
+    }
+    const jwtToken = Cookies.get('jwt_token')
+
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${jwtToken}`,
+      },
+      body: JSON.stringify(requestBody),
+    }
+    const postUrl = `https://apis.ccbp.in/insta-share/posts/${postId}/like`
+    const response = await fetch(postUrl, options)
+    const responseData = await response.json()
+    console.log('like status', responseData)
+  }
+
+  render() {
+    const {data} = this.props
     const {
       userId,
-      profilePic,
       userName,
-      createdAt,
+      profilePic,
       likesCount,
-      postImgUrl,
-      caption,
-      commentsList,
-      userNamesList,
-    } = postDetails
+      comments,
+      createdAt,
+      postDetails,
+    } = data
+    const {isLiked} = this.state
 
     return (
-      <li className="list-container">
-        <div className="profile-container">
-          <div className="img-background">
-            <img
-              src={profilePic}
-              alt="profile author pic"
-              className="profile-pic"
-            />
+      <li className="Post-card-container">
+        <Link to={`/users/${userId}`} className="decoration-none">
+          <div className="post-card-profile-row">
+            <div className="post=card-profile-bg-container">
+              <img
+                src={profilePic}
+                alt="post author profile"
+                className="post-card-profile-pic"
+              />
+            </div>
+            <p className="text-bold">{userName}</p>
           </div>
-          <Link to={`/users/${userId}`}>
-            <h1 className="user-name">{userName}</h1>
-          </Link>
+        </Link>
+        <img
+          alt="post"
+          src={postDetails.image_url}
+          className="post-card-image"
+        />
+        <div className="post-card-text-container">
+          <div className="like-comment-share-row">
+            {!isLiked && (
+              <button
+                type="button"
+                className="transparent-btn"
+                onClick={this.toggleLike}
+                testid="likeIcon"
+              >
+                <BsHeart size={20} color="#262626" />
+              </button>
+            )}
+            {isLiked && (
+              <button
+                type="button"
+                onClick={this.toggleLike}
+                testid="unLikeIcon"
+              >
+                <BsHeartFill size={20} color="red" />
+              </button>
+            )}
+            <button type="button" className="transparent-btn">
+              <FaRegComment size={20} color="#475569" />
+            </button>
+            <button type="button" className="transparent-btn">
+              <BiShareAlt size={20} color="#475569" />
+            </button>
+          </div>
+          <p className="text-bold">
+            {isLiked ? likesCount + 1 : likesCount} likes
+          </p>
+          <p className="post-card-text">{postDetails.caption}</p>
+          {comments.map(item => (
+            <p className="post-card-text" key={item.userId}>
+              <span className="text-bold">{item.userName}</span>
+              {item.comment}
+            </p>
+          ))}
+          <p className="'post-card-gray-text">{createdAt}</p>
         </div>
-        <div className="post-img-container">
-          <img src={postImgUrl} alt="post" className="post-img" />
-        </div>
-        <div className="icons-container">
-          <button type="button" testid="likeIcon" className="like-button">
-            <BsHeart className="icons" size={25} />
-          </button>
-          <FaRegComment className="icons" size={25} />
-          <BiShareAlt className="icons" size={25} />
-        </div>
-        <p className="likes-count">{likesCount} Likes</p>
-        <p className="caption">{caption}</p>
-        <p className="comments">
-          <span>{userNamesList[0]}</span>
-          {commentsList[0]}
-        </p>
-        <p className="comments">
-          <span>{userNamesList[1]}</span>
-          {commentsList[1]}
-        </p>
-        <p className="created-at">{createdAt}</p>
       </li>
     )
   }

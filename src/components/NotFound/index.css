@@ -1,69 +1,58 @@
-.page-container {
-  min-height: 100vh;
-  background-color: #ffffff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.not-found-container {
+.not-con {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
 }
-.not-found-img {
-  height: 297px;
-  width: 269px;
-  left: 586px;
-  top: 235px;
-  border-radius: 0px;
-  padding: 20px;
+.not-image {
+  width: 157px;
+  height: 173px;
 }
-
-.page-not-found-heading {
-  font-family: 'Roboto';
-  font-size: 32px;
+.not-heading {
+  font-family: Roboto;
   font-style: normal;
   font-weight: 500;
-  line-height: 48px;
+  font-size: 20px;
   text-align: center;
+  color: #262626;
 }
-
-.description {
+.not-para {
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
-  line-height: 32px;
-  /* or 160% */
-
+  font-size: 16px;
   text-align: center;
-
   color: #989898;
-  padding: 10px;
-  width: 580px;
 }
-
-.btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 12px 32px;
-
-  position: static;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-
-  background: #4094ef;
-  border-radius: 12px;
-  border-style: none;
+.not-button {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
   color: #ffffff;
   flex: none;
-  order: 0;
-  flex-grow: 0;
-  margin: 0px 0px;
-  cursor: pointer;
+  margin: 0px 8px;
+  background: #4094ef;
+  border-radius: 8px;
+  width: 114px;
+  height: 32px;
+  border: none;
+}
+@media screen and (min-width: 768px) {
+  .not-image {
+    height: 297px;
+    width: 269px;
+  }
+  .not-heading {
+    font-size: 32px;
+  }
+  .not-para {
+    font-size: 20px;
+  }
+  .not-button {
+    width: 141px;
+    height: 48px;
+    font-size: 14px;
+  }
 }

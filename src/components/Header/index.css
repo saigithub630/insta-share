@@ -1,108 +1,158 @@
-* {
-  text-decoration: none;
-}
-
-.nav-links {
+.website-logo-container {
   display: flex;
-  list-style-type: none;
+
   text-decoration: none;
 }
-.nav-container {
-  border-bottom: 1px solid #dadada;
-  height: 50px;
-  padding: 10px;
+.header-nav-bar-container {
   display: flex;
   justify-content: space-around;
-  padding-bottom: 10px;
+  align-items: center;
+  list-style: none;
+  list-style-type: none;
 }
-.logo-container {
-  display: flex;
-}
-.home {
-  font-family: 'Roboto';
-  font-size: medium;
-  font-weight: 500;
-  cursor: pointer;
-  padding-left: 20px;
-  padding-top: 3px;
-  text-decoration: none;
-}
-
-.my-profile {
-  font-family: 'Roboto';
-  font-size: medium;
-  font-weight: 500;
-  cursor: pointer;
-  padding-left: 20px;
-  padding-top: 6px;
-  text-decoration: none;
-}
-
-.logo {
-  height: 35px;
-  width: 30px;
-}
-
-.logo-name {
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 24px;
-  color: #262626;
-  padding-left: 17px;
-  padding-top: 5px;
-}
-
-.logout-btn {
+.header-responsive-container {
+  min-height: 40px;
+  width: 100%;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  padding: 8px 24px;
+  padding: 10px;
+}
+.decoration-none {
+  text-decoration: none !important;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 10px;
+  color: #262626;
+}
+.remove-underline {
+  text-decoration: none;
+}
+.logout-btn {
   background: #4094ef;
   border-radius: 4px;
-  height: 30px;
-  /* Inside auto layout */
-  height: 32px;
-  width: 86px;
-  left: 0px;
-  top: 0px;
-  border-radius: 4px;
-  padding: 8px, 24px, 8px, 24px;
   flex: none;
   order: 0;
   flex-grow: 0;
   margin: 0px 0px;
-  cursor: pointer;
+  padding: 8px 24px;
   border-style: none;
+  cursor: pointer;
   color: #ffffff;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
 }
-
-.mobile-menu-btn {
+.nav-links-container {
   display: none;
 }
-.search-container {
-  margin-top: 3px;
+.nav-bar-items-container {
+  list-style-type: none;
+  display: flex;
+  align-items: center;
 }
-
-.search-box {
+.website-logo-img {
+  max-height: 40px;
+  max-width: 43px;
+}
+.website-logo-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 24px;
+  color: #262626;
+}
+.search-bar-container {
   background: #fafafa;
   border: 1px solid #dbdbdb;
   box-sizing: border-box;
+  border-radius: 3px;
+}
+.search-input-box {
+  width: 214px;
+  height: 28px;
+  left: 781px;
+  top: 18px;
   outline: none;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  padding: 3px;
-}
-
-.search-btn {
   border-style: none;
-  padding: 4px;
-  cursor: pointer;
+  background: #fafafa;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: normal;
+  padding-left: 10px;
+
+  color: #989898;
+}
+.search-btn {
+  background-color: #dbdbdb;
+  border-style: none;
+  width: 34px;
+  height: 28px;
+  left: 960px;
+  top: 19px;
 }
 
-.search-icon {
-  padding-top: 3px;
-  color: #989898;
+.sm-nav-links-wrapper {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.sm-links-container {
+  list-style-type: none;
+}
+.active-link-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  color: #4094ef;
+}
+.inactive-link-text {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  color: #262626;
+}
+.smSearchBarClassName {
+  color: #4094ef;
+}
+.transparent-btn {
+  background-color: transparent;
+  border-style: none;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+}
+.header-sm-nav-links-container {
+  display: flex;
+  flex-direction: column;
+}
+.sm-search-container {
+  display: flex;
+  flex-direction: column;
+}
+@media screen and (min-width: 768px) {
+  .header-sm-nav-links-container {
+    display: none;
+  }
+  .sm-hamberger {
+    display: none;
+  }
+  .nav-links-container {
+    display: inline-block;
+  }
 }

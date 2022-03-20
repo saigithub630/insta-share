@@ -93,8 +93,6 @@
   border-style: none;
   width: 34px;
   height: 28px;
-  left: 960px;
-  top: 19px;
 }
 
 .sm-nav-links-wrapper {
@@ -128,6 +126,16 @@
 }
 .smSearchBarClassName {
   color: #4094ef;
+}
+.active-link-text {
+  color: #4094ef;
+   font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
 }
 .transparent-btn {
   background-color: transparent;

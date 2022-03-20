@@ -5,7 +5,6 @@ import Loader from 'react-loader-spinner'
 
 import Header from '../Header'
 import PostCard from '../PostCard'
-import FailureView from '../FailureView'
 
 import './index.css'
 
@@ -149,16 +148,18 @@ class Home extends Component {
       )
     }
     return (
-      <div className="search-results-not-found-container mt-70px">
-        <img
-          src="https://res.cloudinary.com/dmu5r6mys/image/upload/v1645432829/Group_1_v48lae.png"
-          alt="search not found"
-          className="search-not-found-img"
-        />
-        <h1 className="search-not-found-heading">Search Not Found</h1>
-        <p className="search-not-found-text">
-          Try different keyword or try again
-        </p>
+      <div className="search-container">
+        <div className="search-results-not-found-container">
+          <img
+            src="https://res.cloudinary.com/dmu5r6mys/image/upload/v1645432829/Group_1_v48lae.png"
+            alt="search not found"
+            className="search-not-found-img"
+          />
+          <h1 className="search-not-found-heading">Search Not Found</h1>
+          <p className="search-not-found-text">
+            Try different keyword or search again
+          </p>
+        </div>
       </div>
     )
   }
@@ -169,13 +170,49 @@ class Home extends Component {
     </div>
   )
 
+  renderPostsSomethingWenWrong = () => (
+    <div className="fail-con">
+      <img
+        src="https://res.cloudinary.com/dmu5r6mys/image/upload/v1645288486/Group_7737_m7roxw.png"
+        alt="failure view"
+        className="failure view"
+      />
+      <p className="fail-heading">Something went wrong. Please try again</p>
+      <button
+        className="fail-retry"
+        type="button"
+        onClick={() => this.renderPosts}
+      >
+        Try again
+      </button>
+    </div>
+  )
+
+  renderSearchSomethingWenWrong = () => (
+    <div className="fail-con">
+      <img
+        src="https://res.cloudinary.com/dmu5r6mys/image/upload/v1645288486/Group_7737_m7roxw.png"
+        alt="failure view"
+        className="failure view"
+      />
+      <p className="fail-heading">Something went wrong. Please try again</p>
+      <button
+        className="fail-retry"
+        type="button"
+        onClick={() => this.renderSearchResults}
+      >
+        Try again
+      </button>
+    </div>
+  )
+
   renderUserStories = () => {
     const {userStoriesData} = this.state
 
     const settings = {
       dots: false,
       infinite: false,
-      slidesToShow: 9,
+      slidesToShow: 8,
       slidesToScroll: 1,
       responsive: [
         {
@@ -217,31 +254,34 @@ class Home extends Component {
       ],
     }
     return (
-      <div className="user-stories-container">
-        <ul className="slider-container">
-          <Slider {...settings}>
-            {userStoriesData.map(item => {
-              const {useId, userName, storyUrl} = item
-              return (
-                <li className="user-story-card" key={useId}>
-                  <img
-                    src={storyUrl}
-                    className="user-story-img"
-                    alt="user story"
-                  />
-                  <p className="user-story-name">{userName}</p>
-                </li>
-              )
-            })}
-          </Slider>
-        </ul>
-      </div>
+      <>
+        <div className="user-stories-main-container">
+          <ul className="slider-container">
+            <Slider {...settings}>
+              {userStoriesData.map(item => {
+                const {userId, userName, storyUrl} = item
+                return (
+                  <li className="user-story-card" key={userId}>
+                    <img
+                      src={storyUrl}
+                      className="user-story-img"
+                      alt="user story"
+                    />
+                    <p className="user-story-name">{userName}</p>
+                  </li>
+                )
+              })}
+            </Slider>
+          </ul>
+        </div>
+        <hr className="sm-hr-line" />
+      </>
     )
   }
 
   renderPosts = () => {
     const {postsData} = this.state
-    // console.log(postsData)
+
     return (
       <ul className="posts-view-container">
         {postsData.map(item => (
@@ -256,19 +296,9 @@ class Home extends Component {
 
     switch (storiesApiStatus) {
       case apiStatusConstants.inProgress:
-        return (
-          <div className="user-stories-loader mt-70px">
-            {this.renderLoaderView(30)}
-          </div>
-        )
+        return this.renderLoaderView(30)
       case apiStatusConstants.success:
         return this.renderUserStories()
-      case apiStatusConstants.failure:
-        return (
-          <div className="stories-failure-view">
-            <FailureView retryMethod={() => this.getUserStoriesData} />
-          </div>
-        )
       default:
         return null
     }
@@ -278,19 +308,11 @@ class Home extends Component {
     const {postsApiStatus} = this.state
     switch (postsApiStatus) {
       case apiStatusConstants.inProgress:
-        return (
-          <div className="home-posts-fetch-wrapper">
-            {this.renderLoaderView(70)}
-          </div>
-        )
+        return this.renderLoaderView(70)
       case apiStatusConstants.success:
         return this.renderPosts()
       case apiStatusConstants.failure:
-        return (
-          <div className="home-posts-fetch-wrapper">
-            <FailureView retryMethod={() => this.getPostsData()} />
-          </div>
-        )
+        return this.renderSearchSomethingWenWrong()
       default:
         return null
     }
@@ -304,8 +326,7 @@ class Home extends Component {
       case apiStatusConstants.success:
         return this.renderSearchResults()
       case apiStatusConstants.failure:
-        return <FailureView retryMethod={() => this.getSearchResults()} />
-
+        return this.renderSearchSomethingWenWrong()
       default:
         return null
     }
@@ -314,22 +335,20 @@ class Home extends Component {
   render() {
     const {triggerSearch} = this.state
     return (
-      <div className="home-route-responsive-container">
+      <>
         <Header
           activeLinkText="Home"
           onTriggerSearch={this.onSubmitSearchInput}
         />
         {!triggerSearch ? (
-          <div className="home-contents-wrapper">
+          <div>
             {this.renderUserStoriesViewBasedOnApiStatus()}
             {this.renderPostsViewBasedOnApiStatus()}
           </div>
         ) : (
-          <div className="home-contents-wrapper mt-70px">
-            {this.renderSearchResultsViewBasedOnApiStatus()}
-          </div>
+          <div>{this.renderSearchResultsViewBasedOnApiStatus()}</div>
         )}
-      </div>
+      </>
     )
   }
 }

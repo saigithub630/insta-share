@@ -43,6 +43,7 @@ class PostCard extends Component {
   render() {
     const {data} = this.props
     const {
+      postId,
       userId,
       userName,
       profilePic,
@@ -54,17 +55,17 @@ class PostCard extends Component {
     const {isLiked} = this.state
 
     return (
-      <li className="Post-card-container">
+      <li className="post-card-list-container" key={postId}>
         <Link to={`/users/${userId}`} className="decoration-none">
           <div className="post-card-profile-row">
-            <div className="post=card-profile-bg-container">
+            <div className="post-card-profile-bg-container">
               <img
                 src={profilePic}
                 alt="post author profile"
                 className="post-card-profile-pic"
               />
             </div>
-            <p className="text-bold">{userName}</p>
+            <p className="user-name">{userName}</p>
           </div>
         </Link>
         <img
@@ -87,6 +88,7 @@ class PostCard extends Component {
             {isLiked && (
               <button
                 type="button"
+                className="transparent-btn"
                 onClick={this.toggleLike}
                 testid="unLikeIcon"
               >
@@ -103,14 +105,14 @@ class PostCard extends Component {
           <p className="text-bold">
             {isLiked ? likesCount + 1 : likesCount} likes
           </p>
-          <p className="post-card-text">{postDetails.caption}</p>
+          <p className="post-card-caption">{postDetails.caption}</p>
           {comments.map(item => (
-            <p className="post-card-text" key={item.userId}>
-              <span className="text-bold">{item.userName}</span>
+            <p className="post-card-text" key={item.user_id}>
+              <span className="text-bold">{item.user_name}</span>
               {item.comment}
             </p>
           ))}
-          <p className="'post-card-gray-text">{createdAt}</p>
+          <p className="post-card-gray-text">{createdAt}</p>
         </div>
       </li>
     )

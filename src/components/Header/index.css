@@ -91,8 +91,9 @@
 .search-btn {
   background-color: #dbdbdb;
   border-style: none;
-  width: 34px;
-  height: 28px;
+  height:30px;
+  width:40px;
+  cursor: pointer;
 }
 
 .sm-nav-links-wrapper {
@@ -129,7 +130,7 @@
 }
 .active-link-text {
   color: #4094ef;
-   font-family: Roboto;
+  font-family: Roboto;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -140,10 +141,12 @@
 .transparent-btn {
   background-color: transparent;
   border-style: none;
-  font-family: Roboto;
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
+  padding-bottom: 10px;
+  padding-right: 10px;
 }
 .header-sm-nav-links-container {
   display: flex;

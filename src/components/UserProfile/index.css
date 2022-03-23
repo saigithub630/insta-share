@@ -1,5 +1,5 @@
 .user-profile-main-con {
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   background-color: #fafafa;
 }
@@ -7,10 +7,9 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 300;
-  font-size: 16px;
+  font-size: 15px;
   color: #262626;
-  padding-left: 50px;
-  padding-top: 10px;
+  padding: 10px;
 }
 .username-desktop {
   display: none;
@@ -23,12 +22,8 @@
 }
 .subCons-container {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 250px;
-  margin-left: -70px;
+  justify-content: space-between;
   margin-top: 20px;
-  padding-left: 40px;
   padding-bottom: 10px;
 }
 .image-followers-following-posts-container {
@@ -37,17 +32,15 @@
   align-items: center;
 }
 .profilePic {
-  width: 96px;
-  height: 96px;
+  width: 90px;
+  height: 90px;
   border-radius: 50px;
 }
 .count {
-  font-family: Roboto;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
-  display: flex;
-  align-items: center;
   color: #262626;
   margin-top: -10px;
   padding-bottom: 7px;
@@ -57,6 +50,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-right: 30px;
 }
 .count-heading {
   font-family: Roboto;
@@ -69,63 +63,62 @@
   margin-top: -10px;
 }
 .username-main-mobile {
-  font-family: Roboto;
+  font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
   color: #262626;
-  padding-top: 10px;
-  padding-left: 60px;
+  padding: 10px;
 }
 .bio-mobile {
-  width: 312px;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 24px;
+  font-family: 'Roboto';
+  font-size: 12px;
+  line-height: 20px;
   color: #262626;
-  margin-left: 20px;
+  padding-left: 10px;
 }
 
 .story-container {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
   list-style-type: none;
-  margin-left: 30px;
+  margin-bottom: 10px;
 }
+
 .icon-heading-con {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .posts-icon {
   width: 20px;
   height: 20px;
 }
 .posts-heading {
-  font-family: Roboto;
-  font-style: normal;
+  font-family: 'Roboto';
   font-weight: 500;
-  font-size: 14px;
+  font-size: 15px;
   display: flex;
   align-items: center;
   color: #262626;
-  margin-left: 10px;
+  padding-left: 10px;
 }
+
+.line {
+  width: 100%;
+}
+
 .ul {
   display: flex;
   list-style: none;
-
   list-style-type: none;
 }
 .post-image {
-  max-height: 100px;
-  max-width: 150px;
-  padding-left: 10px;
-  border-radius: 2px;
+  height: 100%;
+  width: 100%;
+  padding-right: 4%;
 }
 .no-posts-display {
   display: flex;
@@ -177,85 +170,64 @@
   color: #262626;
 }
 
+.user-stories-container {
+  padding: 10px;
+}
+
 @media screen and (min-width: 768px) {
-  .image-followers-following-posts-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 1440px;
-    margin-top: 50px;
-  }
+
+
   .post-image {
-    width: 330px;
-    height: 330px;
-    padding-left: 20px;
-    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+    padding-right: 5%;
   }
   .desktop {
-    margin-left: 50px;
+    padding-left: 30px;
+    width:500px;
   }
-  .subCons-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 400px;
-    margin-top: 30px;
-  }
+
   .subCon {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
-  .user-profile-con {
-    width: 1440px;
-    height: 2085px;
-  }
-  .user-profile-main-con {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
-    min-height: 100vh;
+  .user-profile-main-con {
+   
+    height: 100vh;
     width: 100%;
     background-color: #fafafa;
+    padding:50px;
+       
   }
   .profilePic {
     width: 180px;
     height: 180px;
-    border-radius: 100px;
-    margin-left: -100px;
+    border-radius: 50%;
   }
 
-  .subCon {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-  }
   .username-desktop {
     display: flex;
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-style: normal;
     font-weight: 300;
     font-size: 32px;
     line-height: 32px;
     color: #262626;
   }
-  .username-main-desktop {
-    display: flex;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    color: #262626;
-    padding-bottom: 10px;
-  }
+
   .bio-mobile {
     display: none;
+  }
+
+  .bio-desktop {
+    display: block;
+    font-family: 'Roboto';
+    font-size: 17px;
+    color: #262626;
+    font-weight: 400;
   }
 
   .username-mobile {
@@ -264,70 +236,13 @@
   .username-main-mobile {
     display: none;
   }
-  .image-followers-following-posts-container {
-    width: 100%;
-  }
-  .count {
-    margin-right: 5px;
-  }
-  .bio-desktop {
-    display: flex;
-    width: 700px;
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 24px;
-    color: #262626;
-    margin-left: 3px;
-    min-height: 48px;
-  }
-  .count-headings-details-container {
-    width: 350px;
-    margin-left: -15px;
-  }
+
   .story-container {
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    margin-left: -20px;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    padding-left: 20px;
   }
-  .desktop-view-styling {
-    display: flex;
-    flex-direction: column;
-    width: 1040px;
-  }
-  .line {
-    width: 1040px;
-    border: 0.5px solid #c6c6c8;
-  }
-  .posts-container {
-    width: 1080px;
-    padding-left: 20px;
-  }
-  .icon-con {
-    width: 86px;
-    height: 86px;
-    left: 677px;
-    top: 522px;
-    border: 2px solid #262626;
-    box-sizing: border-box;
-    border-radius: 43px;
-  }
-  .no-posts-para {
-    font-style: normal;
-    font-weight: 300;
-    font-size: 32px;
-    line-height: 48px;
-    color: #262626;
-  }
-  .no-posts-icon {
-    width: 48px;
-    height: 45px;
-  }
+
   .count-heading {
     font-size: 16px;
   }
@@ -345,4 +260,11 @@
   box-sizing: border-box;
   margin-right: 20px;
   border-radius: 35px;
+}
+
+.profile-loader {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

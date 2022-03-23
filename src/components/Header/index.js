@@ -53,14 +53,11 @@ class Header extends Component {
   render() {
     const {activeLinkText} = this.props
     const {expandHambMenu, showSmSearchBar} = this.state
-
     const homeLinkClassName =
       activeLinkText === 'Home' ? 'active-link-text' : 'inactive-link-text'
 
     const profileLinkClassName =
-      activeLinkText === 'my-profile'
-        ? 'active-link-text'
-        : 'inactive-link-text'
+      activeLinkText === undefined ? 'active-link-text' : 'inactive-link-text'
 
     const smSearchBarClassName = showSmSearchBar
       ? 'active-link-text'

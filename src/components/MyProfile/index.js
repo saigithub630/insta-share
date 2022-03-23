@@ -6,6 +6,7 @@ import Loader from 'react-loader-spinner'
 import {BsGrid3X3} from 'react-icons/bs'
 import {BiCamera} from 'react-icons/bi'
 import Header from '../Header'
+import FailureView from '../FailureView'
 import './index.css'
 
 const apiStatusConstants = {
@@ -74,7 +75,7 @@ class MyProfile extends Component {
   }
 
   renderLoader = () => (
-    <div className="loader-container" testid="loader">
+    <div className="my-profile-loader" testid="loader">
       <Loader type="TailSpin" color="#4094EF" height={25} width={25} />
     </div>
   )
@@ -99,43 +100,44 @@ class MyProfile extends Component {
     return (
       <>
         <Header />
-        <div className="user-profile-main-con">
+        <div className="my-user-profile-main-con">
           <div className="mobile-view">
             <h1 className="username-mobile">{userName}</h1>
-            <div className="image-followers-following-posts-container">
-              <img src={profilePic} alt="my profile" className="profilePic" />
-              <div className="desktop">
-                <p className="username-desktop">{userName}</p>
-                <ul className="subCons-container">
-                  <li className="subCon">
-                    <p className="count">{postsCount}</p>
-                    <p className="count-heading">posts</p>
-                  </li>
-                  <li className="subCon">
-                    <p className="count">{followersCount}</p>
-                    <p className="count-heading">followers</p>
-                  </li>
-                  <li className="subCon">
-                    <p className="count">{followingCount}</p>
-                    <p className="count-heading">following</p>
-                  </li>
-                </ul>
-                <h1 className="username-main-desktop">{userId}</h1>
-                <h1 className="bio-desktop">{userBio}</h1>
+            <div className="top-section">
+              <div className="my-image-followers-following-posts-container">
+                <img src={profilePic} alt="my profile" className="profilePic" />
+                <div className="desktop">
+                  <p className="username-desktop">{userName}</p>
+                  <ul className="subCons-container">
+                    <li className="subCon">
+                      <p className="count">{postsCount}</p>
+                      <p className="count-heading">posts</p>
+                    </li>
+                    <li className="subCon">
+                      <p className="count">{followersCount}</p>
+                      <p className="count-heading">followers</p>
+                    </li>
+                    <li className="subCon">
+                      <p className="count">{followingCount}</p>
+                      <p className="count-heading">following</p>
+                    </li>
+                  </ul>
+                  <p className="username-main-desktop">{userId}</p>
+                  <p className="bio-desktop">{userBio}</p>
+                </div>
               </div>
+              <p className="username-main-mobile">{userId}</p>
+              <p className="bio-mobile">{userBio}</p>
             </div>
-            <p className="username-main-mobile">{userId}</p>
-            <p className="bio-mobile">{userBio}</p>
           </div>
-
-          <div className="desktop-view-styling">
+          <div className="my-user-stories-container">
             <ul className="story-container">
               {storiesList.map(eachItem => (
-                <li key={eachItem.storyId} storyDetails={eachItem}>
+                <li key={eachItem.storyId}>
                   <img
                     src={eachItem.storyImage}
                     alt="my story"
-                    className="myStoryImage"
+                    className="storyImage"
                   />
                 </li>
               ))}
@@ -146,21 +148,19 @@ class MyProfile extends Component {
               <h1 className="posts-heading">Posts</h1>
             </div>
             {postsList.length > 0 ? (
-              <ul className="my-posts-container">
-                {postsList.map(eachItem => (
-                  <li
-                    className="list-item-my-profile"
-                    key={eachItem.postId}
-                    postsDetails={eachItem}
-                  >
-                    <img
-                      src={eachItem.image}
-                      alt="my post"
-                      className="my-image"
-                    />
-                  </li>
-                ))}
-              </ul>
+              <div className="posts-container">
+                <ul className="ul">
+                  {postsList.map(eachItem => (
+                    <li key={eachItem.postId} className="list-item">
+                      <img
+                        src={eachItem.image}
+                        alt="my post"
+                        className="post-image"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ) : (
               <div className="no-posts-display">
                 <div className="icon-con">
@@ -176,21 +176,7 @@ class MyProfile extends Component {
   }
 
   renderFailure = () => (
-    <div className="fail-con">
-      <img
-        src="https://res.cloudinary.com/dmu5r6mys/image/upload/v1645288486/Group_7737_m7roxw.png"
-        alt="failure view"
-        className="failure view"
-      />
-      <p className="fail-heading">Something went wrong. Please try again</p>
-      <button
-        className="fail-retry"
-        type="button"
-        onClick={this.onClickTryAgainMyProfile}
-      >
-        Try again
-      </button>
-    </div>
+    <FailureView retryMethod={() => this.renderMyProfile()} />
   )
 
   renderAllMyProfile = () => {

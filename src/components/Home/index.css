@@ -11,12 +11,6 @@
   align-items: flex-start;
   padding-left: 13px;
 }
-.loader-container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .slick-container {
   display: flex;
@@ -69,7 +63,7 @@
   align-items: center;
 }
 .search-container {
-  min-height: 100vh;
+  height: 90vh;
   background-color: #fafafa;
   display: flex;
   flex-direction: column;
@@ -80,20 +74,20 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  font-size: 30px;
+  font-size: 20px;
   line-height: 15px;
   color: #262626;
   padding-bottom: 10px;
 }
 .search-not-found-img {
-  max-height: 300px;
-  max-width: 300px;
+  height: 70%;
+  width: 60%;
   padding-bottom: 20px;
 }
 .search-not-found-text {
   font-family: 'Roboto';
   font-style: normal;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 15px;
   color: #262626;
   padding-top: 10px;
@@ -101,6 +95,16 @@
 }
 
 @media screen and (min-width: 768px) {
+  .search-not-found-img {
+    height: 80%;
+    width: 90%;
+  }
+  .search-not-found-heading{
+      font-size:25px;
+  }
+  .search-not-found-text{
+      font-size:20px;
+  }
   .user-story-name {
     font-size: 12px;
     padding-left: 8px;
@@ -130,4 +134,24 @@
     padding-bottom: 20px;
     padding-left: 50px;
   }
+}
+
+.user-stories-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150px;
+}
+.posts-loader {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-loader {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -1,10 +1,11 @@
 import {Component} from 'react'
-
 import Cookies from 'js-cookie'
 import Loader from 'react-loader-spinner'
 import {BsGrid3X3} from 'react-icons/bs'
 import {BiCamera} from 'react-icons/bi'
 import Header from '../Header'
+import FailureView from '../FailureView'
+
 import './index.css'
 
 const apiStatusConstants = {
@@ -27,11 +28,10 @@ class UserProfile extends Component {
   }
 
   renderUserProfile = async () => {
+    this.setState({apiStatus: apiStatusConstants.inProgress})
     const {match} = this.props
     const {params} = match
     const {userId} = params
-
-    this.setState({apiStatus: apiStatusConstants.inProgress})
 
     const jwtToken = Cookies.get('jwt_token')
     const apiUrl = `https://apis.ccbp.in/insta-share/users/${userId}`
@@ -44,7 +44,6 @@ class UserProfile extends Component {
     const response = await fetch(apiUrl, options)
     if (response.ok) {
       const data = await response.json()
-      //  console.log(data)
       const formattedData = {
         followersCount: data.user_details.followers_count,
         followingCount: data.user_details.following_count,
@@ -55,17 +54,14 @@ class UserProfile extends Component {
         userId: data.user_details.user_id,
         userName: data.user_details.user_name,
       }
-      //  console.log(formattedData)
       const postsData = data.user_details.posts.map(eachItem => ({
         postId: eachItem.id,
-        image: eachItem.image,
+        postImage: eachItem.image,
       }))
-      //  console.log(postsData)
       const storiesData = data.user_details.stories.map(eachItem => ({
         storyId: eachItem.id,
         storyImage: eachItem.image,
       }))
-      //  console.log(storiesData)
       this.setState({
         userProfileList: formattedData,
         postsList: postsData,
@@ -96,36 +92,42 @@ class UserProfile extends Component {
         <div className="user-profile-main-con">
           <div className="mobile-view">
             <h1 className="username-mobile">{userName}</h1>
-            <div className="image-followers-following-posts-container">
-              <img src={profilePic} alt="user profile" className="profilePic" />
-              <div className="desktop">
-                <p className="username-desktop">{userName}</p>
-                <ul className="subCons-container">
-                  <li className="subCon">
-                    <p className="count">{postsCount}</p>
-                    <p className="count-heading">posts</p>
-                  </li>
-                  <li className="subCon">
-                    <p className="count">{followersCount}</p>
-                    <p className="count-heading">followers</p>
-                  </li>
-                  <li className="subCon">
-                    <p className="count">{followingCount}</p>
-                    <p className="count-heading">following</p>
-                  </li>
-                </ul>
-                <p className="username-main-desktop">{userId}</p>
-                <p className="bio-desktop">{userBio}</p>
+            <div className="top-section">
+              <div className="image-followers-following-posts-container">
+                <img
+                  src={profilePic}
+                  alt="user profile"
+                  className="profilePic"
+                />
+                <div className="desktop">
+                  <p className="username-desktop">{userName}</p>
+                  <ul className="subCons-container">
+                    <li className="subCon">
+                      <p className="count">{postsCount}</p>
+                      <p className="count-heading">posts</p>
+                    </li>
+                    <li className="subCon">
+                      <p className="count">{followersCount}</p>
+                      <p className="count-heading">followers</p>
+                    </li>
+                    <li className="subCon">
+                      <p className="count">{followingCount}</p>
+                      <p className="count-heading">following</p>
+                    </li>
+                  </ul>
+                  <p className="username-main-desktop">{userId}</p>
+                  <p className="bio-desktop">{userBio}</p>
+                </div>
               </div>
             </div>
             <p className="username-main-mobile">{userId}</p>
             <p className="bio-mobile">{userBio}</p>
           </div>
 
-          <div className="desktop-view-styling">
+          <div className="user-stories-container">
             <ul className="story-container">
               {storiesList.map(eachItem => (
-                <li key={eachItem.storyId} storyDetails={eachItem}>
+                <li key={eachItem.storyId}>
                   <img
                     src={eachItem.storyImage}
                     alt="user story"
@@ -143,13 +145,9 @@ class UserProfile extends Component {
               <div className="posts-container">
                 <ul className="ul">
                   {postsList.map(eachItem => (
-                    <li
-                      key={eachItem.postId}
-                      postsDetails={eachItem}
-                      className="list-item"
-                    >
+                    <li key={eachItem.postId} className="list-item">
                       <img
-                        src={eachItem.image}
+                        src={eachItem.postImage}
                         alt="user post"
                         className="post-image"
                       />
@@ -172,8 +170,8 @@ class UserProfile extends Component {
   }
 
   renderLoaderView = () => (
-    <div className="loader-container" testid="loader">
-      <Loader type="TailSpin" color="#4094EF" height={25} width={25} />
+    <div className="profile-loader" testid="loader">
+      <Loader type="TailSpin" color="#4094EF" height={40} width={40} />
     </div>
   )
 
@@ -182,21 +180,7 @@ class UserProfile extends Component {
   }
 
   renderFailure = () => (
-    <div className="fail-con">
-      <img
-        src="https://res.cloudinary.com/dmu5r6mys/image/upload/v1645288486/Group_7737_m7roxw.png"
-        alt="failure view"
-        className="fail-image"
-      />
-      <p className="fail-heading">Something went wrong. Please try again</p>
-      <button
-        className="fail-retry"
-        type="button"
-        onClick={this.onClickTryAgainUserProfile}
-      >
-        Try again
-      </button>
-    </div>
+    <FailureView retryMethod={() => this.renderUserProfile()} />
   )
 
   renderAllUserProfile = () => {

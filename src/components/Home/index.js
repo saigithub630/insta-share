@@ -5,6 +5,7 @@ import Loader from 'react-loader-spinner'
 
 import Header from '../Header'
 import PostCard from '../PostCard'
+import FailureView from '../FailureView'
 
 import './index.css'
 
@@ -130,6 +131,10 @@ class Home extends Component {
         userStoriesData: updatedData,
         storiesApiStatus: apiStatusConstants.success,
       })
+    } else {
+      this.setState({
+        storiesApiStatus: apiStatusConstants.failure,
+      })
     }
   }
 
@@ -167,42 +172,6 @@ class Home extends Component {
   renderLoaderView = size => (
     <div className="loader-container" testid="loader">
       <Loader type="TailSpin" color="#4094EF" height={size} width={size} />
-    </div>
-  )
-
-  renderPostsSomethingWenWrong = () => (
-    <div className="fail-con">
-      <img
-        src="https://res.cloudinary.com/dmu5r6mys/image/upload/v1645288486/Group_7737_m7roxw.png"
-        alt="failure view"
-        className="failure view"
-      />
-      <p className="fail-heading">Something went wrong. Please try again</p>
-      <button
-        className="fail-retry"
-        type="button"
-        onClick={() => this.renderPosts}
-      >
-        Try again
-      </button>
-    </div>
-  )
-
-  renderSearchSomethingWenWrong = () => (
-    <div className="fail-con">
-      <img
-        src="https://res.cloudinary.com/dmu5r6mys/image/upload/v1645288486/Group_7737_m7roxw.png"
-        alt="failure view"
-        className="failure view"
-      />
-      <p className="fail-heading">Something went wrong. Please try again</p>
-      <button
-        className="fail-retry"
-        type="button"
-        onClick={() => this.renderSearchResults}
-      >
-        Try again
-      </button>
     </div>
   )
 
@@ -291,42 +260,52 @@ class Home extends Component {
     )
   }
 
-  renderUserStoriesViewBasedOnApiStatus = () => {
+  renderUserStoriesBasedOnApiStatus = () => {
     const {storiesApiStatus} = this.state
 
     switch (storiesApiStatus) {
       case apiStatusConstants.inProgress:
-        return this.renderLoaderView(30)
+        return (
+          <div className="user-stories-loader">{this.renderLoaderView(30)}</div>
+        )
       case apiStatusConstants.success:
         return this.renderUserStories()
+      case apiStatusConstants.failure:
+        return (
+          <div className="stories-failure-view">
+            <FailureView retryMethod={() => this.getUserStoriesData()} />
+          </div>
+        )
       default:
         return null
     }
   }
 
-  renderPostsViewBasedOnApiStatus = () => {
+  renderPostsBasedOnApiStatus = () => {
     const {postsApiStatus} = this.state
+
     switch (postsApiStatus) {
       case apiStatusConstants.inProgress:
-        return this.renderLoaderView(70)
+        return <div className="posts-loader">{this.renderLoaderView(50)}</div>
       case apiStatusConstants.success:
         return this.renderPosts()
       case apiStatusConstants.failure:
-        return this.renderSearchSomethingWenWrong()
+        return <FailureView retryMethod={() => this.getPostsData()} />
       default:
         return null
     }
   }
 
-  renderSearchResultsViewBasedOnApiStatus = () => {
+  renderSearchResultBasedOnApiStatus = () => {
     const {searchApiStatus} = this.state
+
     switch (searchApiStatus) {
       case apiStatusConstants.inProgress:
-        return this.renderLoaderView(50)
+        return <div className="search-loader">{this.renderLoaderView(50)}</div>
       case apiStatusConstants.success:
         return this.renderSearchResults()
       case apiStatusConstants.failure:
-        return this.renderSearchSomethingWenWrong()
+        return <FailureView retryMethod={() => this.getSearchResults()} />
       default:
         return null
     }
@@ -342,11 +321,11 @@ class Home extends Component {
         />
         {!triggerSearch ? (
           <div>
-            {this.renderUserStoriesViewBasedOnApiStatus()}
-            {this.renderPostsViewBasedOnApiStatus()}
+            {this.renderUserStoriesBasedOnApiStatus()}
+            {this.renderPostsBasedOnApiStatus()}
           </div>
         ) : (
-          <div>{this.renderSearchResultsViewBasedOnApiStatus()}</div>
+          <div>{this.renderSearchResultBasedOnApiStatus()}</div>
         )}
       </>
     )
